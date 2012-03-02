@@ -1,11 +1,11 @@
 import pymongo
 
 class MatchStore:
-  firstID = 158306092244418561 # First meaningful tweet!
+  firstID = 0
 
   def __init__(self, year='2012'):
     self.conn = pymongo.Connection()
-    db = 'fms' + year
+    db = 'fms'# + year
     self.matches = self.conn[db].matches
 
   def getLatestMatchID(self):

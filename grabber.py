@@ -2,9 +2,13 @@ import twitter
 import json
 from matches import MatchStore
 
+min2012 = 158306092244418561 # First meaningful tweet!
+max2011 = 132877548332924929
+
 def get2012MatchData(status) :
   i = status.text.split()
   match = {}
+  match['year'] = 2012
   match['event'] = i[0][4:]
   match['type'] = i[2]
   match['number'] = int(i[4])
@@ -30,6 +34,7 @@ def get2012MatchData(status) :
 def get2011MatchData(status) :
   i = status.text.split()
   match = {}
+  match['year'] = 2011
   match['event'] = i[0][4:]
   match['type'] = i[2]
   match['number'] = int(i[4])
@@ -57,15 +62,20 @@ i=1
 curPage = 1
 ms = MatchStore('2012')
 lastIDFetched = ms.getLatestMatchID()
+print "starting from: ", lastIDFetched
 
 while running :
   statuses = api.GetUserTimeline("frcfms", since_id=lastIDFetched, count=numToFetch, page=curPage)
   print "Fetched",len(statuses),"matches"
   for s in statuses : 
-    m = get2012MatchData(s)
-    ms.addMatch(m)
-    print s.text
-    print i
+    if s.id > min2012:
+      m = get2012MatchData(s)
+      ms.addMatch(m)
+    elif s.id < max2011:
+      m = get2011MatchData(s)  
+      ms.addMatch(m)
+    r =  s.text.split()
+    print i, r[0], r[4]
     i = i + 1
 
   if len(statuses) < numToFetch :
