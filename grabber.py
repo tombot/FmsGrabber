@@ -1,4 +1,5 @@
 import twitter
+import json
 
 def getMatchData(text) :
   i = text.split()
@@ -27,4 +28,4 @@ api = twitter.Api()
 statuses = api.GetUserTimeline("frcfms")
 
 for s in statuses : 
-  print  getMatchData(s.text)
+  print  json.dumps(getMatchData(s.text))
