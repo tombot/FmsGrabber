@@ -3,9 +3,9 @@ import pymongo
 class MatchStore:
   firstID = 0
 
-  def __init__(self, year='2012'):
+  def __init__(self):
     self.conn = pymongo.Connection()
-    db = 'fms'# + year
+    db = 'fms'
     self.matches = self.conn[db].matches
 
   def getLatestMatchID(self):
