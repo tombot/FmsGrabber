@@ -1,6 +1,6 @@
 import twitter
 import json
-from matches import MatchStore
+from matchstore import MatchStore
 
 min2012 = 158306092244418561 # First meaningful tweet in 2012
 max2011 = 132877548332924929 # Last meaningful tweet in 2011
@@ -76,7 +76,7 @@ while running :
     print i, r[0], r[2], r[4]
     i = i + 1
 
-  if len(statuses) < numToFetch :
+  if len(statuses) < pageLength :
     running = False
   else :
     curPage += 1
