@@ -1,0 +1,12 @@
+FRCFMS Twitter Parsing
+
+This tool will read the @FRCFMS twitter feed, parse the match results, and store them locally.
+
+Requirments: (Follow all setup instructions for these)
+Python 2.6+
+python-twitter (http://code.google.com/p/python-twitter/)
+mongodb (http://www.mongodb.org/)
+
+How to run:
+Run 'mongod'
+Run 'python grabber.py'
