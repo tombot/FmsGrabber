@@ -10,3 +10,10 @@ mongodb (http://www.mongodb.org/)
 How to run:
 Run 'mongod'
 Run 'python grabber.py'
+
+To use OPR Calculator:
+python opr.py EVENT_CODE YEAR
+
+For example
+"python opr.py SJ 2012" will find OPRs for 2012 silicon valley
+"python opr.py all 2012" will find worldwide OPRs for 2012
