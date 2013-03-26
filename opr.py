@@ -6,6 +6,8 @@ import datetime
 import argparse
 import sys
 
+
+
 # Find a value in a list
 def find(f, seq):
   """Return first item in sequence where f(item) == True."""
@@ -58,9 +60,9 @@ def findOPR(type, event, year):
     red = m['red_alliance']
     
     if type == "adjusted" or type == "scalescore":
-      rf = m['red_final'] - m['red_bonus'] - m['blue_fouls']
-      bf = m['blue_final'] - m['blue_bonus'] - m['red_fouls']
-      if type == "scalescore":
+      rf = m['red_final'] - m['red_climb'] - m['blue_fouls']
+      bf = m['blue_final'] - m['blue_climb'] - m['red_fouls']
+      if type == "scalescore" and year == "2102":
         rf += m['coopertition'] * 5
         bf += m['coopertition'] * 5
     else :
@@ -110,11 +112,11 @@ event = sys.argv[1]
 conn = pymongo.Connection()
 
 if len(sys.argv) < 3:
-  year="2012"
+  year="2013"
 else : 
   year=sys.argv[2]
 
-for t in ['final', 'hybrid', 'teleop', 'fouls', 'bonus', 'adjusted', 'scalescore']:
+for t in ['final', 'auto', 'teleop', 'fouls', 'climb', 'adjusted', 'scalescore']:
   filename = "out/" + year + "_" + event + "-" + t + ".csv"
   print "Finding", t, "OPR score :", filename
   oprs = findOPR(t, event, year)
